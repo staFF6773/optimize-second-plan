@@ -104,12 +104,17 @@ def create_tray_icon():
         root.deiconify()
         icon.stop()
 
+    def quit_app(icon, item):
+        icon.stop()
+        root.quit()
+
     image = Image.new('RGB', (64, 64), (0, 255, 0))
     draw = ImageDraw.Draw(image)
     draw.rectangle([16, 16, 48, 48], fill=(255, 0, 0))
     
     icon = pystray.Icon("test_icon", image, "Administrador de Procesos", menu=pystray.Menu(
-        pystray.MenuItem("Mostrar", on_click)
+        pystray.MenuItem("Mostrar", on_click),
+        pystray.MenuItem("Cerrar", quit_app)
     ))
     icon.run()
 
